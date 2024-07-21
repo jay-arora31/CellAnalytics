@@ -94,7 +94,6 @@ export default function Login() {
               <div className="mt-3 text-center">
                 <Link to="/auth/register" className="text-decoration-none">Don't have an account? Register</Link>
                 <br />
-                Sample Credentials: <br />email: admin@gmail.com  <br />  pass: admin
               </div>
             </div>
           </div>

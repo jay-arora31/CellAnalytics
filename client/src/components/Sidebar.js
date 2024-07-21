@@ -64,7 +64,7 @@ const Sidebar = () => {
                         </div>
                     )}
                 </div>
-                <button onClick={handleLogout} className="bg-primary list-group-item list-group-item-action logout-button">Logout</button>
+                <button onClick={handleLogout} className="bg-danger list-group-item list-group-item-action logout-button">Logout</button>
             </div>
             <div className="main-content">
                 {/* This is where the main content of your pages will go */}
