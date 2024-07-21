@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Plot from 'react-plotly.js';
 import { useParams } from 'react-router-dom';
+import AuthContext from '../context/AuthContext';
 import './CellChart.css'; // Ensure you import the CSS file for grid layout
 
 const CellChart = () => {
   const { cellId } = useParams();
+  const { accessToken, isLoggedIn } = useContext(AuthContext);
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    if (cellId) {
-      fetch(`http://localhost:8000/api/cell-data/${cellId}`)
+    if (cellId && isLoggedIn) {
+      fetch(`http://localhost:8000/api/cell-data/${cellId}`, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+        },
+      })
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -20,9 +26,15 @@ const CellChart = () => {
           console.log('Fetched cell data:', data); // Log the data to check its structure
           setData(data);
         })
-        .catch(error => console.error('Error fetching cell data:', error));
+        .catch(error => {
+          console.error('Error fetching cell data:', error);
+          // Handle token expiration or unauthorized access
+          if (error.response && error.response.status === 401) {
+            // Optionally, handle logout or token refresh here
+          }
+        });
     }
-  }, [cellId]);
+  }, [cellId, accessToken, isLoggedIn]);
 
   if (!data) return <p>Loading... {cellId}</p>;
 

@@ -1,21 +1,29 @@
-// src/components/SoHPieChart.js
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Plot from 'react-plotly.js';
+import { axiosPrivateInstance } from '../api/apiConfig';
+import useAuth from '../hooks/useAuth';
 
 const SoHPieChart = () => {
     const [sohData, setSohData] = useState([]);
+    const { accessToken } = useAuth(); // Get the access token from the context
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/soh/')
-            .then(response => {
+        const fetchSoHData = async () => {
+            try {
+                const response = await axiosPrivateInstance.get('api/soh/', {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}` // Include the token in the request headers
+                    }
+                });
                 console.log(response.data); // Debugging log to ensure data is fetched correctly
                 setSohData(response.data);
-            })
-            .catch(error => {
+            } catch (error) {
                 console.error('Error fetching SoH data:', error);
-            });
-    }, []);
+            }
+        };
+
+        fetchSoHData();
+    }, [accessToken]); // Ensure accessToken is a dependency
 
     const renderPieChart = (cell) => {
         const sizes = [cell.soh, 100 - cell.soh];
@@ -70,8 +78,8 @@ const SoHPieChart = () => {
 
     return (
         <div>
-            <h2 style={{ textAlign: 'center', margin: '20px 0',marginLeft:'100px' }}>State of Health </h2>
-            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center'  ,marginLeft:'200px'}}>
+            <h2 style={{ textAlign: 'center', margin: '20px 0', marginLeft: '100px' }}>State of Health</h2>
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', marginLeft: '200px' }}>
                 {sohData.map(cell => (
                     <div key={cell.cell_id} style={{ flex: '1 0 45%', padding: '10px', maxWidth: '400px' }}>
                         {renderPieChart(cell)}
