@@ -1,3 +1,4 @@
+
 ## Cell Analytics
 ### Demo Video
 
@@ -359,5 +360,6 @@ npm start
 ![image](https://github.com/user-attachments/assets/77a64216-99d0-487c-b4e3-cef36032d89e)
 
 ## Cell Page
-![image](https://github.com/user-attachments/assets/bb31f8f0-abc9-4946-8611-802f263fc543)
+![image](https://github.com/user-attachments/assets/e8af08ba-4e11-4363-b20e-566d93ae5c24)
+![image](https://github.com/user-attachments/assets/032f217a-8175-4da9-a3a3-b3b306b6f254)
 
