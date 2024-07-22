@@ -192,7 +192,7 @@ npm start
 
 ### 1.1. Register
 
-- **Endpoint:** `/api/register/`
+- **Endpoint:** `/auth/register/`
 - **Method:** POST
 - **Description:** Registers a new user.
 
@@ -215,7 +215,7 @@ npm start
 
 ### 1.2 Login
 
-**Endpoint:** `/api/login/`  
+**Endpoint:** `/auth/login/`  
 **Method:** `POST`  
 **Description:** Authenticates a user and returns tokens.
 
@@ -237,7 +237,7 @@ npm start
 
 ### 1.3 Logout
 
-**Endpoint:** `/api/logout/`  
+**Endpoint:** `/auth/logout/`  
 **Method:** `POST`  
 **Description:** Logs out the user by blacklisting the refresh token and clearing cookies.
 
